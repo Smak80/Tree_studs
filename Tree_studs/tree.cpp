@@ -5,6 +5,7 @@ int _find_in_tree(node* tree, int value);
 bool _remove_from_tree(node*& node, int value);
 void _drop_tree(node*& node);
 void _move_node(node* rem);
+node* _find_prev_nearest(node* rem);
 
 void add_to_tree(tree& tree, int value)
 {
@@ -123,4 +124,28 @@ void _move_node(node* rem)
 	_copy_value(rem, to_remove);
 	_del(to_remove);
 	to_remove = child;
+}
+
+node* _find_prev_nearest(node* rem)
+{
+	if (!rem) return rem;
+	auto prev = rem;
+	if (_is_left(rem))
+	{
+		auto last = rem->left;
+		while (last && last->right)
+		{
+			prev = last;
+			last = last->right;
+		}
+	} else
+	{
+		auto last = rem->right;
+		while (last && last->left)
+		{
+			prev = last;
+			last = last->left;
+		}
+	}
+	return prev;
 }
