@@ -7,6 +7,10 @@ void _drop_tree(node*& node);
 void _move_node(node* rem);
 node* _find_prev_nearest(node* rem);
 
+enum _traverse_type{prefix, infix, postfix};
+
+void _traverse(queue& q, node* root, _traverse_type type);
+
 void add_to_tree(tree& tree, int value)
 {
 	if (_add_to_tree(tree.root, value))
@@ -148,4 +152,30 @@ node* _find_prev_nearest(node* rem)
 		}
 	}
 	return prev;
+}
+
+queue prefix_traverse(tree tree)
+{
+	queue q;
+	_traverse(q, tree.root, prefix);
+	return q;
+}
+
+queue infix_traverse(tree tree)
+{
+	queue q;
+	_traverse(q, tree.root, infix);
+	return q;
+}
+
+queue postfix_traverse(tree tree)
+{
+	queue q;
+	_traverse(q, tree.root, postfix);
+	return q;
+}
+
+void _traverse(queue& q, node* root, _traverse_type type)
+{
+	
 }
